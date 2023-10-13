@@ -1,4 +1,3 @@
 index/
-logs/
 *.fa
 .snakemake/
