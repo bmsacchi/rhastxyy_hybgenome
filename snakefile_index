@@ -1,0 +1,16 @@
+rule bwa_mem2_index:
+    input:
+        "{genome}"
+    output:
+        "index/{genome}.0123",
+        "index/{genome}.amb",
+        "index/{genome}.ann",
+        "index/{genome}.bwt.2bit.64",
+        "index/{genome}.pac"
+    log:
+        "logs/bwa-mem2_index/{genome}.log"
+    threads: 1
+    wrapper:
+        "v2.6.1/bio/bwa-mem2/index"
+
+
