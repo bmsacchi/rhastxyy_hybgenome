@@ -2,3 +2,16 @@
 init ticks = 197556072278
 ref seq len = 4139052792
 binary seq ticks = 139478901285
+build index ticks = 4740329789183
+ref_seq_len = 4139052792
+count = 0, 1206888125, 2069526396, 2932164667, 4139052792
+BWT[370936483] = 4
+CP_SHIFT = 5, CP_MASK = 31
+sizeof CP_OCC = 64
+max_occ_ind = 129345399
+ref_seq_len = 4139052792
+count = 0, 1206888125, 2069526396, 2932164667, 4139052792
+BWT[370936483] = 4
+CP_SHIFT = 6, CP_MASK = 63
+sizeof CP_OCC = 64
+max_occ_ind = 64672699

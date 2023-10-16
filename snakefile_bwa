@@ -1,0 +1,21 @@
+# get sample names
+#SAMPLES = glob_wildcards('reads/{sample}.fastq.gz')
+
+
+rule bwa_mem2_mem:
+    input:
+        reads=["reads/{sample}_R1.fastq.gz", "reads/{sample}_R2.fastq.gz"],
+        # Index can be a list of (all) files created by bwa, or one of them
+        idx=multiext("index/merged_hap1_hap2_NC_no_autosomes.fa", ".amb", ".ann", ".bwt.2bit.64", ".pac"),
+    output:
+        "mapped/{sample}.bam",
+    log:
+        "logs/bwa_mem2/{sample}.log",
+    params:
+        extra=r"-R '@RG\tID:{sample}\tSM:{sample}'",
+        sort="samtools",  # Can be 'none', 'samtools', or 'picard'.
+        sort_order="coordinate",  # Can be 'coordinate' (default) or 'queryname'.
+        sort_extra="",  # Extra args for samtools/picard sorts.
+    threads: 8
+    wrapper:
+        "v2.6.1/bio/bwa-mem2/mem"

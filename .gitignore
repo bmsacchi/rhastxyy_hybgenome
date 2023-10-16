@@ -1,3 +1,5 @@
 index/
 *.fa
 .snakemake/
+reads/
+mapped/
