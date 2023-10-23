@@ -1,0 +1,14 @@
+rule samtools_sort:
+    input:
+        "mapped/{sample}.bam",
+    output:
+        "mapped/{sample}.sorted.bam",
+    log:
+        "logs/samtoolssort/{sample}.log",
+    params:
+        extra="-m 4G",
+    threads: 4
+    resources:
+        tmpdir="/ohta2/bianca.sacchi/tmp",    
+    wrapper:
+        "v2.6.1/bio/samtools/sort"
