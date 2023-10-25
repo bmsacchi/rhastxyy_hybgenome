@@ -1,0 +1,38 @@
+#rule star_index:
+#    input:
+#        fasta="merged_hap1_hap2_NC_no_autosomes.fa",
+#    output:
+#        directory("merged_hap1_hap2_NC_no_autosomes"),
+#    threads: 8
+#    params:
+#        extra="",
+#    log:
+#        "logs/star/star_index_merged_hap1_hap2_NC_no_autosomes.log",
+#    resources:
+#        tmpdir="/ohta2/bianca.sacchi/tmp"
+#    wrapper:
+#        "v2.6.1/bio/star/index"
+
+rule star_pe_multi:
+    input:
+        fq1="RNAreads/{sample}_R1.fastq.gz",
+        fq2="RNAreads/{sample}_R2.fastq.gz",
+        # path to STAR reference genome index
+        idx="merged_hap1_hap2_NC_no_autosomes",
+    output:
+        # see STAR manual for additional output files
+        aln="STARmapped/{sample}.bam",
+        log="STARmapped/{sample}.log.out",
+        sj="STARmapped/{sample}.SJ.out.tab",
+        unmapped=["STARmapped/{sample}.unmapped.1.fastq.gz","STARmapped/{sample}.unmapped.2.fastq.gz"],
+    log:
+        "logs/star/{sample}.log",
+    params:
+        # optional parameters
+        extra="--outSAMtype BAM SortedByCoordinate",
+    threads: 8
+    resources:
+        tmpdir="/ohta2/bianca.sacchi/tmp"
+    wrapper:
+        "v2.6.1/bio/star/align"
+
