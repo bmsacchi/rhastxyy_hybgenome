@@ -1,0 +1,1 @@
+/ohta1/cassandre.pyne/assemblies/merged_hap1_hap2_NC_no_autosomes_regions.txt

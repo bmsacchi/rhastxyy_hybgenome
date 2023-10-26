@@ -1,10 +1,8 @@
 index/
 *.fa
 .snakemake/
-reads/
 mapped/
 merged_hap1_hap2_NC_no_autosomes/
 merged_hap1_hap2_NC_no_autosomes.fa
 STARmapped/
-RNAreads/
 LICENSE
