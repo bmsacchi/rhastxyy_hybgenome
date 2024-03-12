@@ -1,0 +1,43 @@
+samples = ['SCF2m12', 'ScF2f5']
+ref = "merged_hap1_hap2_NC_no_autosomes.fa"
+### workflow ###
+
+# This rule establishes the names of output files from other rules 
+rule all:
+     input:
+         # bwaidx = "index/merged_TX_noMatPAR",
+         # bam = expand("DNAmapped/{sample}.bam", sample = samples),
+         # markdup = expand("DNAmapped/{sample}_merged_sorted_dupsMarked.bam", sample = samples),
+         # stats = expand("DNAmapped/duplication_stats/{sample}_dupStats.txt", sample = samples),
+         # bamidx = expand("DNAmapped/{sample}_merged_sorted_dupsMarked.bam.bai", sample = samples),
+          txt = expand("bamqc/{sample}/genome_results.txt", sample = samples),
+          html = expand("bamqc/{sample}/qualimapReport.html", sample = samples)
+
+# This rule runs bamqc and creates depth plots
+rule bamqc:
+    input:
+        bam = "mapped/{sample}.sorted.bam",
+        anno = "gff/chr_regions.bed"
+    output:
+        txt = "bamqc/{sample}/genome_results.txt",
+        html = "bamqc/{sample}/qualimapReport.html"
+    params:
+        outdir = "bamqc/{sample}",
+    log:
+        out = "logs/bamqc/{sample}.qc.out",
+        err = "logs/bamqc/{sample}.qc.err"
+    threads: 10
+    resources:
+        tmpdir="/ohta2/bianca.sacchi/tmp/"
+    shell:
+        "unset DISPLAY && "
+        "qualimap bamqc "
+        "--java-mem-size=16G "
+        "--bam {input.bam} "
+        "--paint-chromosome-limits "
+        "-nt {threads} "
+        "-gff {input.anno} "
+        "--outdir {params.outdir} "
+        "> {log.out} 2> {log.err}"
+
+

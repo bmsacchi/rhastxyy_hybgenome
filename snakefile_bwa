@@ -1,4 +1,4 @@
-# get sample names
+#get sample names
 #SAMPLES = glob_wildcards('reads/{sample}.fastq.gz')
 
 

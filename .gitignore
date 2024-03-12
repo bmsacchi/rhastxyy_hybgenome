@@ -7,3 +7,7 @@ merged_hap1_hap2_NC_no_autosomes.fa
 STARmapped/
 LICENSE
 gff/
+merged_hap1_hap2_NC_no_autosomes.fa.gz
+logs/bamqc/
+bamqc/SCF2m12/css/
+bamqc/ScF2f5/css/
